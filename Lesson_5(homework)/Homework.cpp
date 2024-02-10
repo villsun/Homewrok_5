@@ -41,8 +41,37 @@ int Search_Brackets_Square(char* str)
 			{
 				return 0;
 			}
-			char topChar = p[top--];
-			if ((str[i] == ')' && topChar != '(') || (str[i] == ']' && topChar != '['))
+			char top_char = p[top--];
+			if ((str[i] == ')' && top_char != '(') || (str[i] == ']' && top_char != '['))
+			{
+				return 0;
+			}
+		}
+	}
+	delete[] p;
+
+	return top;
+}
+
+int Search_Brackets_Square_Сurly(char* str)
+{
+	const int SIZE = strlen(str);
+	char* p = new char[SIZE];
+	int top = -1;
+	for (int i = 0; i < SIZE; i++)
+	{
+		if (str[i] == '(' || str[i] == '[' || str[i] == '{')
+		{
+			p[++top] = str[i];
+		}
+		else if (str[i] == ')' || str[i] == ']' || str[i] == '}')
+		{
+			if (top == -1)
+			{
+				return 0;
+			}
+			char top_char = p[top--];
+			if ((str[i] == ')' && top_char != '(') || (str[i] == ']' && top_char != '[') || (str[i] == '}' && top_char != '{'))
 			{
 				return 0;
 			}
@@ -55,7 +84,7 @@ int Search_Brackets_Square(char* str)
 
 int main()
 {
-	// Завдання 1;
+	// Завдання 1
 
 	/*char str[] = "He(llo)";*/
 	/*if (Search_Brackets(str))
@@ -69,9 +98,17 @@ int main()
 
 	/*Search_Brackets(str) ? cout << "All is well\n" : cout << "Not all is well\n";*/
 
-	char str[] = "He([llo)]";
+	// Завдання 2
 
-	Search_Brackets_Square(str) == -1 ? cout << "All is well\n" : cout << "Not all is well\n";
+	/*char str[] = "He([llo)]";
+
+	Search_Brackets_Square(str) == -1 ? cout << "All is well\n" : cout << "Not all is well\n";*/
+
+	// Завдання 3
+
+	char str[] = "He{[(llo}])";
+
+	Search_Brackets_Square_Сurly(str) == -1 ? cout << "All is well\n" : cout << "Not all is well\n";
 
 
 	return 0;
